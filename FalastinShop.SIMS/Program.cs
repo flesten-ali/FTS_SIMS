@@ -2,7 +2,7 @@
 using FalastinShop.Simple_Inventory_Management_System.InventoryManagment;
 using FalastinShop.Simple_Inventory_Management_System.ProductManagment;
 printWelcome();
-
+Utilities.StartSelection();
 
 
 

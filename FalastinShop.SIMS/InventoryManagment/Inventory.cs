@@ -16,8 +16,15 @@ namespace FalastinShop.Simple_Inventory_Management_System.InventoryManagment
            products = new List<Product>();
         }
 
-        
-         
+
+        public void AddProduct(Product product)
+        {
+            products.Add(product);
+            Print.ConfigSuccessConsole("Product added successfully!");
+        }
+
+
+
 
 
 
