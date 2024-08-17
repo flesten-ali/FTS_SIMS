@@ -12,11 +12,30 @@ namespace FalastinShop.Simple_Inventory_Management_System.PrintConfig
         {
             Console.WriteLine(msg);
         }
-        public static void ConfigSuccessConsole(string msg)
+        public static void ConfigConsoleColor(string msg, ConsoleColor color)
         {
-            Console.ForegroundColor = ConsoleColor.Green;
+            Console.ForegroundColor = color;
             Log(msg);
             Console.ResetColor();
         }
+        public static void ConfigSuccessConsole(string msg)
+        {
+            ConfigConsoleColor(msg , ConsoleColor.Green);
+
+
+        }
+
+
+        public static void ConfigErrorConsole(string msg)
+        {
+           ConfigConsoleColor(msg, ConsoleColor.Red);
+
+        }
+
+
+
+
+
+
     }
 }
