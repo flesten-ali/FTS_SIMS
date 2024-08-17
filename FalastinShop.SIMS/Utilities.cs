@@ -46,6 +46,9 @@ namespace FalastinShop.Simple_Inventory_Management_System
                 case "5":
                     Searchforproduct();
                         break;
+                case "6":
+                    Exit();
+                    break;
                 default:
                     Console.WriteLine("Please enter valid selection!");
                     StartSelection();
@@ -206,6 +209,10 @@ namespace FalastinShop.Simple_Inventory_Management_System
                 Print.ConfigErrorConsole($"Product with name {name} doesnot exist!");
             }
             StartSelection();
+        }
+        public static void Exit()
+        {
+            Print.ConfigSuccessConsole("Thanks!Press Enter to Exit");
         }
 
     }
