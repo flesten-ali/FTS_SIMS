@@ -20,8 +20,7 @@ namespace FalastinShop.Simple_Inventory_Management_System.InventoryManagment
         public void AddProduct(Product product)
         {
             products.Add(product);
-            Print.ConfigSuccessConsole("Product added successfully!");
-        }
+         }
 
 
         public void PrintAllProducts()
@@ -50,7 +49,17 @@ namespace FalastinShop.Simple_Inventory_Management_System.InventoryManagment
             Console.WriteLine($"* {product.Name} with Qunitity {product.Quntity}. Price: {product.Price.ItemPrice} {product.Price.Currency}\n");
 
         }
-      
+        public void DeleteByName(string name)
+        {
+            var product = FindByName(name);
+            if (product != null)
+            {
+                products.Remove(product);
+                
+            }
+        }
+
+
 
     }
 }
