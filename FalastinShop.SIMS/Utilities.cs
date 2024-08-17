@@ -43,6 +43,9 @@ namespace FalastinShop.Simple_Inventory_Management_System
                 case "4":
                     DeleteproductChoice();
                     break;
+                case "5":
+                    Searchforproduct();
+                        break;
                 default:
                     Console.WriteLine("Please enter valid selection!");
                     StartSelection();
@@ -180,6 +183,23 @@ namespace FalastinShop.Simple_Inventory_Management_System
                 inventory.DeleteByName(name);
                 Print.ConfigSuccessConsole($"Product deleted successfully!");
 
+            }
+            else
+            {
+                Print.ConfigErrorConsole($"Product with name {name} doesnot exist!");
+            }
+            StartSelection();
+        }
+
+        public static void Searchforproduct()
+        {
+            Console.WriteLine("Enter name of product you want to search");
+            var name = EnterName();
+            var existProduct = inventory.FindByName(name);
+            if (existProduct != null)
+            {
+                inventory.PrintProduct(existProduct);
+                Print.ConfigSuccessConsole("Product Found!");
             }
             else
             {
