@@ -10,7 +10,7 @@ namespace FalastinShop.Simple_Inventory_Management_System.InventoryManagment
 {
     public class Inventory
     {
-        private static List<Product> products;  
+        private  List<Product> products;  
 
         public Inventory() { 
            products = new List<Product>();
@@ -38,6 +38,19 @@ namespace FalastinShop.Simple_Inventory_Management_System.InventoryManagment
 
         }
 
+        public Product? FindByName(string name)
+        {
+            var res = products.Where(x => x.Name == name).FirstOrDefault();
+            
+            return res   ;
+        }
+        public void PrintProduct(Product product)
+        {
+            
+            Console.WriteLine($"* {product.Name} with Qunitity {product.Quntity}. Price: {product.Price.ItemPrice} {product.Price.Currency}\n");
+
+        }
+      
 
     }
 }

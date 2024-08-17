@@ -8,10 +8,10 @@ namespace FalastinShop.Simple_Inventory_Management_System.ProductManagment
 {
     public class Product
     {
-        private Guid id;
-        public string Name { get; private set; } 
-        public int Quntity { get; private set; }  
-        public Price Price { get; private set; }
+        public Guid Id { get; }
+        public string Name { get;   set; } 
+        public int Quntity { get;   set; }  
+        public Price Price { get;   set; }
  
 
          public Product(string name, int quntity,double itemPrice ,  Currency currency)
@@ -19,7 +19,7 @@ namespace FalastinShop.Simple_Inventory_Management_System.ProductManagment
             Name = name;
             Quntity = quntity;
             Price = new Price() { ItemPrice  = itemPrice, Currency = currency};
-            id =Guid.NewGuid();
+            Id =Guid.NewGuid();
          }
 
 
