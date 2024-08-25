@@ -1,21 +1,7 @@
-﻿using FalastinShop.Simple_Inventory_Management_System;
-using FalastinShop.Simple_Inventory_Management_System.InventoryManagment;
-using FalastinShop.Simple_Inventory_Management_System.ProductManagment;
+﻿using FalastinShop.SIMS;
+
 printWelcome();
 Utilities.StartSelection();
-
-
-
-
-
-
-
-
-
-
-
-
-
 Console.ReadLine();
 static void printWelcome()
 {

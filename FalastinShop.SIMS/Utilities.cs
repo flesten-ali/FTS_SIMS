@@ -1,31 +1,24 @@
-﻿using FalastinShop.Simple_Inventory_Management_System.InventoryManagment;
-using FalastinShop.Simple_Inventory_Management_System.PrintConfig;
-using FalastinShop.Simple_Inventory_Management_System.ProductManagment;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FalastinShop.Simple_Inventory_Management_System
-{
-    public class Utilities
+﻿using FalastinShop.SIMS.PrintConfig;
+using FalastinShop.SIMS.ProductManagment;
+namespace FalastinShop.SIMS;
+public class Utilities
     {
        private static Inventory inventory = new();
-        public static void ShowChoicesMenue()
+        public static void ShowChoicesMenu()
         {
-
             Console.WriteLine("Choose the action number: ");
-
-            Console.WriteLine("1. Add a product\n2. View all products\n3. Edit a product\n4. Delete a product\n5. Search for a product\n6. Exit");
-
-
+            Console.WriteLine("""
+                1. Add a product\n
+                2. View all products\n
+                3. Edit a product\n
+                4. Delete a product\n
+                5. Search for a product\n
+                6. Exit
+                """);
         }
         public static void StartSelection()
         {
-             
-            ShowChoicesMenue();
+        ShowChoicesMenu();
             string? actionNumber = Console.ReadLine();
             Console.Clear();
 
@@ -65,12 +58,11 @@ namespace FalastinShop.Simple_Inventory_Management_System
 
             var itemPrice = EnterPriceValue();
 
-            var itemcurrency = EnterCurrency();
+            var itemCurrency = EnterCurrency();
 
-            var product = new Product(itemName, itemQuntity, itemPrice, itemcurrency);
+            var product = new Product(itemName, itemQuntity, itemPrice, itemCurrency);
             return product;
         }
-
         public static string EnterName()
         {
             var itemName = "";
@@ -86,7 +78,7 @@ namespace FalastinShop.Simple_Inventory_Management_System
         {
             Console.WriteLine("Please enter Product Quntity");
             var qun = Console.ReadLine();
-            int.TryParse(qun, out int itemQuntity);
+            int.TryParse(qun, out var itemQuntity);
             return itemQuntity;
         }
         public static double EnterPriceValue()
@@ -112,8 +104,6 @@ namespace FalastinShop.Simple_Inventory_Management_System
 
             StartSelection();
          }
-        
-      
         public static void ViewAllProductsChoice()
         {
              
@@ -143,7 +133,7 @@ namespace FalastinShop.Simple_Inventory_Management_System
                 choice1 = Console.ReadLine();
                 if (choice1 == "y")
                 {
-                    existProduct.Quntity = EnterQuntity();
+                    existProduct.Quantity = EnterQuntity();
                 }
 
 
@@ -193,7 +183,6 @@ namespace FalastinShop.Simple_Inventory_Management_System
             }
             StartSelection();
         }
-
         public static void Searchforproduct()
         {
             Console.WriteLine("Enter name of product you want to search");
@@ -206,7 +195,7 @@ namespace FalastinShop.Simple_Inventory_Management_System
             }
             else
             {
-                Print.ConfigErrorConsole($"Product with name {name} doesnot exist!");
+                Print.ConfigErrorConsole($"Product with name {name} does not exist!");
             }
             StartSelection();
         }
@@ -216,4 +205,4 @@ namespace FalastinShop.Simple_Inventory_Management_System
         }
 
     }
-}
+ 

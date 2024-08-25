@@ -1,41 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FalastinShop.Simple_Inventory_Management_System.PrintConfig
+﻿namespace FalastinShop.SIMS.PrintConfig;
+public static class Print
 {
-    public class Print
+   public static void ConfigSuccessConsole(string msg)
     {
-        public static void Log(string msg)
-        {
-            Console.WriteLine(msg);
-        }
-        public static void ConfigConsoleColor(string msg, ConsoleColor color)
-        {
-            Console.ForegroundColor = color;
-            Log(msg);
-            Console.ResetColor();
-        }
-        public static void ConfigSuccessConsole(string msg)
-        {
-            ConfigConsoleColor(msg , ConsoleColor.Green);
-
-
-        }
-
-
-        public static void ConfigErrorConsole(string msg)
-        {
-           ConfigConsoleColor(msg, ConsoleColor.Red);
-
-        }
-
-
-
-
-
+        ConfigConsoleColor(msg, ConsoleColor.Green);
+    }
+    public static void ConfigErrorConsole(string msg)
+    {
+        ConfigConsoleColor(msg, ConsoleColor.Red);
 
     }
+    private static void Log(string msg)
+    {
+        Console.WriteLine(msg);
+    }
+    private static void ConfigConsoleColor(string msg, ConsoleColor color)
+    {
+        Console.ForegroundColor = color;
+        Log(msg);
+        Console.ResetColor();
+    }
 }
+ 
