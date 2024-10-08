@@ -20,5 +20,4 @@ ______    _           _   _         _____ _
     Console.WriteLine("Press enter to start... ");
     Console.ReadLine();
     Console.Clear();
-
 }
