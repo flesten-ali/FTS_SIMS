@@ -7,4 +7,12 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+<<<<<<< Updated upstream
+=======
+  <ItemGroup>
+    <PackageReference Include="MongoDB.Driver" Version="2.29.0" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.6" />
+  </ItemGroup>
+
+>>>>>>> Stashed changes
 </Project>
