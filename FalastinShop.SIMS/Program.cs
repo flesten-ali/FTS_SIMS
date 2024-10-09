@@ -3,6 +3,7 @@
 printWelcome();
 Utilities.StartSelection();
 Console.ReadLine();
+
 static void printWelcome()
 {
     Console.ForegroundColor = ConsoleColor.Green;
