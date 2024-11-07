@@ -1,5 +1,6 @@
 ﻿using FalastinShop.SIMS.MongoDB.Models;
 using FalastinShop.SIMS.ProductManagment;
+using Microsoft.Extensions.Configuration;
 using MongoDB.Bson;
 using MongoDB.Driver;
 
@@ -7,13 +8,14 @@ namespace FalastinShop.SIMS.MongoDB.DB
 {
     public class AppDB
     {
-        public AppDB()
+        public AppDB(IConfiguration configuration)
         {
-            _client = new MongoClient(connectionUri);
+            _connectionUri = configuration.GetConnectionString("MongoConnection");
+            _client = new MongoClient(_connectionUri);
             _database = _client.GetDatabase("Inventory");
         }
 
-        const string connectionUri = "mongodb+srv://Falastin:password@cluster0.vpt1l.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+        private readonly string? _connectionUri;
         private readonly MongoClient _client;
         private readonly IMongoDatabase _database;
 
@@ -28,11 +30,11 @@ namespace FalastinShop.SIMS.MongoDB.DB
             InsertProduct(product, currencyId);
         }
 
-        public void UpdateProduct(string name  , Product product)
+        public void UpdateProduct(string name, Product product)
         {
             var productCollection = _database.GetCollection<ProductDoc>("Products");
 
-            var dbProduct = productCollection.Find(x=>x.Name == name).FirstOrDefault();
+            var dbProduct = productCollection.Find(x => x.Name == name).FirstOrDefault();
 
             if (dbProduct is null)
             {
@@ -51,8 +53,8 @@ namespace FalastinShop.SIMS.MongoDB.DB
                                                .Set(x => x.Price, product.Price.ItemPrice)
                                                .Set(x => x.CurrencyId, currencyId);
 
-          var res =   productCollection.UpdateOne(filter, update);
-            if(res.MatchedCount > 0)
+            var res = productCollection.UpdateOne(filter, update);
+            if (res.MatchedCount > 0)
                 Console.WriteLine("Product updated successfully!");
             else
                 Console.WriteLine("Update Faild!");
@@ -98,14 +100,14 @@ namespace FalastinShop.SIMS.MongoDB.DB
         {
             var productCollection = _database.GetCollection<ProductDoc>("Products");
 
-            var dbProduct  = productCollection.Find(x => x.Name == name).FirstOrDefault();
-            if(dbProduct ==  null)
+            var dbProduct = productCollection.Find(x => x.Name == name).FirstOrDefault();
+            if (dbProduct == null)
             {
                 Console.WriteLine("Product Not Found!");
                 return;
             }
             var filter = Builders<ProductDoc>.Filter.Eq(x => x.Name, name);
-            productCollection.DeleteOne(filter); 
+            productCollection.DeleteOne(filter);
         }
     }
 }
