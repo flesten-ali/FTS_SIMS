@@ -6,7 +6,12 @@ namespace FalastinShop.SIMS;
 public class Utilities
 {
     private static Inventory _inventory = new();
-    private static readonly IAppDB _appDB = new AppDB();
+    private static  IAppDB _appDB;
+
+    public Utilities(IAppDB appDB)
+    {
+        _appDB = appDB;
+    }
 
     public static void ShowChoicesMenu()
     {

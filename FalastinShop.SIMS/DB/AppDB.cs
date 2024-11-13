@@ -1,14 +1,20 @@
 ﻿using FalastinShop.SIMS.ProductManagment;
+using Microsoft.Extensions.Configuration;
 using System.Data.SqlClient;
 namespace FalastinShop.SIMS.DB;
 
 public class AppDB : IAppDB
 {
-    public static readonly string connectionStr = @"Server=WX1094183;Database=Inventory;Trusted_Connection=True;";
+    public AppDB(IConfiguration configuration)
+    {
+        _connectionStr = configuration.GetConnectionString("DBconnection");
+    }
+
+    private readonly string _connectionStr;
 
     public void SaveProduct(Product product)
     {
-        using SqlConnection connection = new(connectionStr);
+        using SqlConnection connection = new(_connectionStr);
         connection.Open();
         SqlTransaction transaction = connection.BeginTransaction();
         try
@@ -33,7 +39,7 @@ public class AppDB : IAppDB
                                                INSERT INTO Product(Name,Quantity,ProductPrice,CurrencyId) 
                                                 VALUES(@Name,@Quantity,@ProductPrice,@CurrencyId)
                                             """,
-                                            connection, 
+                                            connection,
                                             transaction);
 
         productCommand.Parameters.AddWithValue("@Name", product.Name);
@@ -47,7 +53,7 @@ public class AppDB : IAppDB
     {
         Product? dbProduct = null;
         currencyId = 0;
-        using SqlConnection connection = new(connectionStr);
+        using SqlConnection connection = new(_connectionStr);
 
         connection.Open();
         var command = new SqlCommand("""
@@ -83,7 +89,7 @@ public class AppDB : IAppDB
 
     public int? FindCurrency(string code)
     {
-        using SqlConnection connection = new(connectionStr);
+        using SqlConnection connection = new(_connectionStr);
         connection.Open();
         var command = new SqlCommand(
             """          
@@ -91,7 +97,7 @@ public class AppDB : IAppDB
                 from Currency
                 where CurrencyCode = @code
              """
-             ,connection);
+             , connection);
 
         command.Parameters.AddWithValue("@code", code);
 
@@ -109,7 +115,7 @@ public class AppDB : IAppDB
         var dbProduct = GetProductByName(name, out var currencyId);
         if (dbProduct != null)
         {
-            using SqlConnection connection = new(connectionStr);
+            using SqlConnection connection = new(_connectionStr);
             connection.Open();
             SqlTransaction transaction = connection.BeginTransaction();
 
@@ -178,7 +184,7 @@ public class AppDB : IAppDB
         var product = GetProductByName(name, out var currencyId);
         if (product != null)
         {
-            using SqlConnection connection = new SqlConnection(connectionStr);
+            using SqlConnection connection = new SqlConnection(_connectionStr);
             connection.Open();
             var deleteCommand = new SqlCommand(
                 """ 
